@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-video-generator
+  labels:
+    app: ai-video-generator
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ai-video-generator
+  template:
+    metadata:
+      labels:
+        app: ai-video-generator
+    spec:
+      containers:
+      - name: ai-video-generator
+        image: gcr.io/YOUR_PROJECT_ID/ai-video-generator:latest
+        ports:
+        - containerPort: 7860
+        env:
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-video-secrets
+              key: gemini-api-key
+        - name: HUGGINGFACE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: ai-video-secrets
+              key: huggingface-token
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+          limits:
+            memory: "8Gi"
+            cpu: "4"
+        volumeMounts:
+        - name: video-storage
+          mountPath: /app/outputs
+      volumes:
+      - name: video-storage
+        persistentVolumeClaim:
+          claimName: video-storage-pvc 

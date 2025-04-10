@@ -1,0 +1,22 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+gradio
+openai
+edge-tts
+moviepy
+torch
+diffusers
+Pillow
+nest_asyncio
+transformers
+accelerate
+numpy==1.26.4
+sentencepiece
+python-dotenv
+Wand
+imageio==2.34.2
+imageio-ffmpeg==0.5.1
+google-generativeai
+fastapi
+uvicorn
+requests
+python-multipart

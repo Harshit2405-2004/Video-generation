@@ -1,0 +1,7 @@
+# Ignore the Python virtual environment
+new_venv/
+
+# Ignore environment variables
+.env
+
+Readme.md.txt
